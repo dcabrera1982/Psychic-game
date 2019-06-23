@@ -8,13 +8,27 @@
 7.  Attempts will reset back to quantity 9 if the user guesses correctly within the 9 attempts.  */
 
 
-// Array of letters
-alert("You have 9 guesses.  Guess any letter A-Z");
+// Alert to start
+ var guessGame = confirm("You have 9 guesses.  Guess any letter A-Z");
+alert(guessGame); 
 
-var answer = 3;
-var guess;
+var letterChoice = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 
-for (i=0; i < 9; i++) {
+
+
+var win = "wins:"
+var loss = "Losses:"
+var guess = "Guesses Left:"
+var userGuess = "Your guesses so far:"
+
+
+
+ for (var i=0; i < letterChoice.length; i++) {
     //console.log(i);
-    guess = prompt("Guess the letter");
-}
+    if (answer == guess) {
+        alert("That's correct")
+        break;
+    } else {
+        guess = prompt("WRONG!!!!  Please try again.");
+    }
+ }

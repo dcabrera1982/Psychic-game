@@ -9,26 +9,74 @@
 
 
 // Alert to start
- var guessGame = confirm("You have 9 guesses.  Guess any letter A-Z");
-alert(guessGame); 
 
-var letterChoice = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+var win = 0;
+var loss = 0;
+var numberGuesses = 9;
+var guessedChoices = [];
+
+// set up array for computer to choose from
+var letterChoice = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+// set up the computer to pick a random indexed value from array
+var computerGuess = Math.floor(Math.random() * letterChoice.length);
+var computerChoice = letterChoice[computerGuess];
+
+//console.log(computerChoice);
 
 
-
-var win = "wins:"
-var loss = "Losses:"
-var guess = "Guesses Left:"
-var userGuess = "Your guesses so far:"
+// add a function for the user to press a key
+document.onkeyup = function (event) {
+    var userGuess = event.key;
 
 
-
- for (var i=0; i < letterChoice.length; i++) {
-    //console.log(i);
-    if (answer == guess) {
-        alert("That's correct")
-        break;
-    } else {
-        guess = prompt("WRONG!!!!  Please try again.");
+    // user selects a value a-z
+    var pick = /[a-z]/gi;
+    if (!pick.test(userGuess)) {
+        alert("please enter a letter");
     }
- }
+    else {
+        //console.log(userGuess);
+    }
+    // reset computer choice if user loses
+    if (numberGuesses <= 0) {
+        loss++;
+        document.getElementById("loss").innerHTML = loss++;
+        console.log("You are NOT a winner!");
+        alert("You are NOT a winner!");
+        numberGuesses = 9;
+        guessedChoices = [];
+        document.getElementById("guessedChoices").innerHTML = guessedChoices;
+        document.getElementById("numberGuesses").innerHTML = 9;
+        computerGuess = Math.floor(Math.random() * letterChoice.length);
+        computerChoice = letterChoice[computerGuess];
+        //console.log(computerChoice);
+    }
+    // randomly selected computer choice and user choice comparison
+    if (computerChoice === userGuess) {
+        //console.log("We have a WINNER!");
+        alert("We have a WINNER!");
+        document.getElementById("win").innerHTML = win++;
+        guessedChoices = [];
+        document.getElementById("guessedChoices").innerHTML = guessedChoices;
+        computerGuess = Math.floor(Math.random() * letterChoice.length);
+        computerChoice = letterChoice[computerGuess];
+        //console.log(computerChoice);
+        numberGuesses = 9;
+        document.getElementById("numberGuesses").innerHTML = 9;
+    } else {
+        //console.log("Try again!");
+        document.getElementById("numberGuesses").innerHTML = numberGuesses--;
+        guessedChoices.push(userGuess);
+        document.getElementById("guessedChoices").innerHTML = guessedChoices;
+    }
+}
+
+
+
+
+
+
+
+
+
